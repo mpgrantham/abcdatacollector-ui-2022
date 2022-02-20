@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import './index.css';
+
 import App from './App';
+import { loadState, saveState } from './utils/stateUtils';
+import reducer from './reducers/reducer';
 import reportWebVitals from './reportWebVitals';
 
+const persistedState = loadState();
+const store = createStore(reducer, persistedState);
+store.subscribe(() => {
+  saveState(store.getState());
+})
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+   <BrowserRouter>
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    </BrowserRouter>,
   document.getElementById('root')
 );
 

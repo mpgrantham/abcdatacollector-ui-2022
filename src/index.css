@@ -7,7 +7,168 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.root {
+  flex-grow: 1;
+  padding-top: 70;
+}
+
+.header {
+  height: 70px;
+  line-height: 70px;;
+  vertical-align: middle;
+}
+
+.content {
+  margin-top: 70px;
+}
+
+.header .title:hover {
+  cursor: pointer;
+}
+
+.title-text {
+	font-family: Verdana;
+	color: white;
+  float: left;
+  font-size: 1.2em;
+}
+
+.title-image {
+	float: left;
+	height: 70px;
+	width: 65px;
+	background-image: url("ABC_64px.png"); 
+	background-repeat: no-repeat;
+	background-position: 0px 5px;
+}
+
+.header-actions {
+  background: #f1f1f1;
+  padding: 15px 24px;
+  color: #000000;
+}
+
+.header-tabs {
+	background: #f1f1f1;
+	color: #000000;
+}
+
+.bordered-box {
+  padding: 25px; 
+  border: 1px solid #dadada; 
+  border-radius: 5px;
+}
+
+.add-incident {
+  text-align: right; 
+  padding-top: 6px;
+  /* padding-left: 25px; */
+}
+
+.dashboard-button {
+  padding-top: 6px;
+ /* padding-left: 25px; */
+}
+
+.log-button {
+  text-align: center; 
+  padding-top: 6px;
+ /* padding-left: 25px; */
+}
+
+.content-container {
+  padding: 25px;
+}
+
+.abc-div-fieldset legend {
+  padding-bottom: 5px;
+}
+
+.abc-div {
+	padding-left: 5px; 
+  height: 150px; 
+  overflow-y: auto; 
+	border: 1px solid #e2e2e2;
+  border-radius: .25rem;
+}
+
+.section-span {
+	float: left; 
+	width: 275px;
+	vertical-align: top;
+	padding: 2px 2px 2px 2px;
+	margin: 0px 0px 0px 0px;
+}
+
+.ag-theme-material .ag-header-cell-text {
+  font-size: 15px;
+}
+
+.ag-theme-material .ag-cell-value {
+  font-size: 15px;
+}
+
+.toolbar-name {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.optional {
+	font-size: .8em; 
+	color: #888888;
+	font-weight: normal;
+}
+
+.error-message {
+  font-size: .7em;
+  color: red;
+  z-index: 10;
+  display: none;
+}
+
+.invalid-abc .error-message {
+  display: inline-block;
+}
+
+
+.incident-entry-div .incident-pickers label {
+  font-size: 1.4rem;
+}
+
+.log-link {
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+.loading-div {
+  text-align: center;
+  padding-top: 300px;
+  font-size: 2.0rem;
+}
+
+.settings-control {
+  width: 400px;
+}
+
+.myabcdata-loading .MuiPaper-root {
+  background: initial;
+  box-shadow: none;
+}
+
+.myabcdata-loading .MuiBackdrop-root {
+  opacity: .4 !important;
+}
+
+.list-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 1.1rem;
+}
+
+.home-page .home-page-text {
+  line-height: 30px; 
+  font-size: 1.1rem;
+}
+
+.home-page .home-page-para {
+  margin-top: 15px;
 }
