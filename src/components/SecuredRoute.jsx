@@ -25,22 +25,3 @@ function SecuredRoute({ children }) {
 }
 
 export default SecuredRoute;
-
-/*
- return (
-      <Route {...rest}
-        element={({ location }) =>
-            isSessionValid() ? (children) 
-            : (
-            <Navigate 
-              replace
-              to={{
-                pathname: "/signin",
-                state: { from: location }
-              }}
-            />
-          )
-        }
-      />
-    );
-    */
