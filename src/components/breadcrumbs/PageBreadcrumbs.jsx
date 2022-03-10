@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link as RouterLink  } from 'react-router-dom';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -41,11 +40,7 @@ const trails = [
 ];
 
 const PageBreadcrumbs = (props) => {
-
-    const globalState = useSelector(state => state);
-
-    let displayName = props.displayName ? props.displayName : globalState.observedReducer.observedNm;
-
+    
     function displayBreadcrumbs() {
 
         // This allows for a custom breadcrumb trail
@@ -70,12 +65,9 @@ const PageBreadcrumbs = (props) => {
     }
 
     return (
-        <React.Fragment>
-            <div className="toolbar-name">{displayName}</div>
-            <div>
-                {displayBreadcrumbs()}
-            </div>
-        </React.Fragment>
+        <div>
+            {displayBreadcrumbs()}
+        </div>
     );
 }
 

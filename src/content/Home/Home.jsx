@@ -77,8 +77,8 @@ const Home = () => {
                 <CardHeader title="Use Case" style={{color: '#1565c0'}}></CardHeader>
                 <CardContent style={{paddingTop: '0'}}>
                     <Typography variant="subtitle1" className="home-page-text">
-                        A mother wants to log her son's behaviors.&nbsp;&nbsp;She registers as an <b>ABC Data Collector</b> user and defines her son as an Observed.&nbsp;&nbsp;
-	                    She is now the administrator for her son, the Observed.&nbsp;&nbsp;She can customize the list of Antecedents, Behaviors, Consequences and Locations that
+                        A mother wants to log her son's behaviors.&nbsp;&nbsp;She registers as an <b>ABC Data Collector</b> user and defines her son as an observed.&nbsp;&nbsp;
+	                    She is now the administrator for her son, the observed.&nbsp;&nbsp;She can customize the list of Antecedents, Behaviors, Consequences and Locations that
 	                    best fit her son.&nbsp;&nbsp;She can enter behavior incidents and view his behavior log.
 			        </Typography>
 

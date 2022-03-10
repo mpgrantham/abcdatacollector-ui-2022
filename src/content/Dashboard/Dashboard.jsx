@@ -10,8 +10,10 @@ import {
     ToggleButton, ToggleButtonGroup, 
     Typography 
 } from '@mui/material';
+import Box from '@mui/material/Box';
 
 import { PageBreadcrumbs } from '../../components/breadcrumbs';
+import ObservedList from '../../components/observed/ObservedList';
 import { ExportButton, IncidentButton } from '../../components/button';
 import { getCurrentRole, setDisabledObserved } from '../../actions/observedActions';
 import ObservedService from '../../services/ObservedService';
@@ -26,7 +28,7 @@ const toggleItems = [
     { value: 7, label: 'Last 7 Days' },
     { value: 30, label: 'Last 30 Days' },
     { value: 90, label: 'Last 90 Days' },
-    { value: 180, label: 'Last 180 Days' },
+    //{ value: 180, label: 'Last 180 Days' },
 ]
 
 const Dashboard = () => {
@@ -81,30 +83,31 @@ const Dashboard = () => {
      
     return (
         <div className="content-container">
-            <Grid
-                container
-                direction="row"
-                style={{paddingBottom: '15px'}}
-            >
-                <Grid item xs={9} md={10}>
-                    <PageBreadcrumbs page="Dashboard"/>
-                </Grid>
-               
-                <Grid item xs={3} md={2} className="add-incident">
-                    <IncidentButton disabled={globalState.observedReducer.observedId === 0 || currentRole === ROLE_LOG }/>
-                </Grid>
-            </Grid>
 
+            <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column' }, flexGrow: 1, borderBottom: 1, borderColor: '#dddddd' }}>
+                <Box sx={{ flexGrow: 1, pb: 1 }}>
+                    <PageBreadcrumbs page="Dashboard"/>
+                </Box>
+
+                <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, flexGrow: 1, justifyContent: 'space-between' }}>
+
+                    <Box sx={{ pb: 1 }}>
+                        <ObservedList/>
+                    </Box>
+
+                    {currentRole !== ROLE_LOG && globalState.observedReducer.observedId !== 0 &&
+                    <Box sx={{ flexGrow: 0, pb: 1 }}>
+                        <IncidentButton/>
+                    </Box>
+                    }
+
+                </Box>
+            </Box>
+           
             {currentRole !== ROLE_ENTRY &&
-            <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="stretch"
-                spacing={3}
-            >
-                <Grid item xs={12}>
-                    <ToggleButtonGroup
+            <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column' }, flexGrow: 1 }}>
+
+                <ToggleButtonGroup
                         color="primary"
                         value={period}
                         exclusive
@@ -119,25 +122,20 @@ const Dashboard = () => {
                             })
                         }
                     </ToggleButtonGroup>
-                </Grid>
-                
-                <Grid item xs={12}>
-                    <Card variant="outlined">
+
+                    <Card variant="outlined" sx={{ mt: 2 }}>
                         <CardContent >
-                            <Grid
-                                container
-                                direction="row"
-                                justifyContent="space-between"
-                                alignItems="center"
-                            >
-                                <Typography gutterBottom variant="h5" component="h2" style={{marginBottom: '24px'}}>
+
+                            <Box sx={{ mb: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, flexGrow: 1, justifyContent: 'space-between' }}>
+                                <Typography gutterBottom variant="h5" component="h2">
                                     Recent Incidents
                                 </Typography>
 
-                                <ExportButton onClick={exportLog}/>
-                               
-                            </Grid>
-
+                                <Box sx={{ display: 'flex', flexGrow: 0 }}>
+                                    <ExportButton onClick={exportLog}/>
+                                </Box>
+                            </Box>
+                           
                             <div className="ag-theme-material" style={ {height: '300px', width: '100%'} }>
                                 <IncidentGrid 
                                     ref={incidentGridRef}
@@ -152,61 +150,50 @@ const Dashboard = () => {
                             </Button>
                         </CardActions>
                     </Card>
-                </Grid>
 
-                <Grid item xs={12}>
-                    <Grid
-                        container
-                        direction="row"
-                        alignItems="stretch"
-                        spacing={3}
-                    >
-                        <Grid item xs={12} md={6}>
-                            <Card variant="outlined" style={{height: '100%'}}>
-                                <CardContent >
-                                    <Typography gutterBottom variant="h5" component="h2" style={{marginBottom: '24px'}}>
-                                        Top ABC Combinations
-                                    </Typography>
+                    <Card variant="outlined" sx={{ mt: 2 }}>
+                        <CardContent >
+                            <Typography gutterBottom variant="h5" component="h2">
+                                Top ABC Combinations
+                            </Typography>
 
-                                    <Grid
-                                        container
-                                        direction="row"
-                                        alignItems="stretch"
-                                        spacing={3}
-                                    >
-                                        <Grid item xs={12} md={6}>
-                                            <ABCList 
-                                                title="Antecedent - Behavior" 
-                                                incidents={incidents}
-                                            />
-                                        </Grid>
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="stretch"
+                                spacing={3}
+                            >
 
-                                        <Grid item xs={12} md={6}>
-                                            <ABCList 
-                                                title="Behavior - Consequence" 
-                                                incidents={incidents}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <ABCList 
+                                        title="Antecedent - Behavior" 
+                                        incidents={incidents}
+                                    />
+                                </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <Card variant="outlined" style={{height: '100%'}}>
-                                <CardContent >
-                                    <Typography gutterBottom variant="h5" component="h2" style={{marginBottom: '24px'}}>
-                                        ABC Frequency
-                                    </Typography>
+                                <Grid item xs={12} md={6}>
+                                    <ABCList 
+                                        title="Behavior - Consequence" 
+                                        incidents={incidents}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
 
-                                    <ABCWordCloud incidents={incidents}/>
+                    <Card variant="outlined" sx={{ mt: 2 }}>
+                        <CardContent >
+                            <Typography gutterBottom variant="h5" component="h2">
+                                ABC Frequency
+                            </Typography>
+
+                            <ABCWordCloud incidents={incidents}/>
                                 
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
+                        </CardContent>
+                    </Card>
+                
+            </Box>
+
             }
             {currentRole === ROLE_ENTRY &&
             <Grid

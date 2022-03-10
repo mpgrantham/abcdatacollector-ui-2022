@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link as RouterLink } from "react-router-dom";
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
@@ -10,7 +11,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import { PageBreadcrumbs } from '../../components/breadcrumbs';
-import { IncidentButton } from '../../components/button';
 
 import IncidentService from '../../services/IncidentService';
 import ObservedService from '../../services/ObservedService';
@@ -90,52 +90,48 @@ function IncidentView({showLoading}) {
      
     return (
         
-        <div className="incident-entry-div" style={{padding: '25px'}}>
+        <div className="content-container incident-entry-div">
 
-            <Grid
-                container
-                direction="row"
-                style={{borderBottom: '1px solid #dddddd', paddingBottom: '15px'}}
-            >
-                <Grid item xs={7} md={8}>
+            <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column' }, flexGrow: 1, borderBottom: 1, borderColor: '#dddddd' }}>
+                <Box sx={{ flexGrow: 1, pb: 1 }}>
                     <PageBreadcrumbs page="Incident View"/>
-                </Grid>
-               
-                <Grid item xs={5} md={4} className="add-incident">
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        startIcon={<EditIcon/>}
-                        component={RouterLink} 
-                        to={editLink}
-                        style={{marginRight: '25px'}}
-                        disabled={viewState.editDisabled}
-                    >
-                        Edit
-                    </Button>
+                </Box>
 
-                    {observed.adminRole &&
+                <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, flexGrow: 1, justifyContent: 'space-between' }}>
+                    <Box sx={{ flexGrow: 1, pb: 1 }}>
                         <Button 
                             variant="contained" 
                             color="primary" 
-                            startIcon={<DeleteIcon/>}
-                            onClick={confirmDelete}
+                            startIcon={<EditIcon/>}
+                            component={RouterLink} 
+                            to={editLink}
                             style={{marginRight: '25px'}}
                             disabled={viewState.editDisabled}
                         >
-                            Delete
+                            Edit
                         </Button>
-                    }
 
-                    <IncidentButton/>
-                </Grid>
-            </Grid>
-
+                        {observed.adminRole &&
+                            <Button 
+                                            variant="contained" 
+                                            color="primary" 
+                                            startIcon={<DeleteIcon/>}
+                                            onClick={confirmDelete}
+                                            style={{marginRight: '25px'}}
+                                            disabled={viewState.editDisabled}
+                            >
+                                Delete
+                            </Button>
+                        }
+                    </Box>
+                </Box>
+            </Box>
+         
             {viewState.incident.id &&
             <Grid  
                 container
                 spacing={3}
-                style={ {paddingTop: '25px'} }
+                sx={{ pt: 1 }}
             >
                 <LabelValue label="Incident Date/Time" value={viewState.incident.incidentDtStr}/>
 

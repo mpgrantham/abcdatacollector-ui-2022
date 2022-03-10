@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import Box from '@mui/material/Box';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -55,13 +56,16 @@ const ABCWordCloud = (props) => {
 
 
     return (
-        <div>
+        <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, flexGrow: 1 }}>
+
             <ToggleButtonGroup
                 value={abcs}
                 onChange={handleChange}
                 aria-label="text formatting"
                 size="small"
                 color="primary"
+                orientation="vertical"
+                sx={{ mr: { xs: 0, md: 3 }, mb: { xs: 2, md: 0 } }}
             >
                 <ToggleButton value={ANTECEDENT} aria-label="bold">
                     Antecendents
@@ -74,15 +78,12 @@ const ABCWordCloud = (props) => {
                 </ToggleButton>
             </ToggleButtonGroup>
 
-            <div style={{paddingTop: '25px'}}>
-                <TagCloud
-                    minSize={12}
-                    maxSize={35}
-                    tags={words}
-                />
-            </div>
-           
-        </div>
+            <TagCloud
+                minSize={12}
+                maxSize={35}
+                tags={words}
+            />
+        </Box>
     );
 
 }

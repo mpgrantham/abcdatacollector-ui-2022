@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -186,15 +187,19 @@ function Settings({showLoading}) {
     return (
         <div className="content-container">
 
-            <Grid
-                container
-                direction="row"
-            >
-                <Grid item xs={9} md={10}>
-                    <PageBreadcrumbs page="Settings" displayName={globalState.userReducer.userName}/>
-                </Grid>
-            </Grid>
+            <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column' }, flexGrow: 1, borderBottom: 1, borderColor: '#dddddd' }}>
 
+                <Box sx={{ flexGrow: 1, pb: 1 }}>
+                    <PageBreadcrumbs page="Settings"/>
+                </Box>
+
+                <Box sx={{ pb: 1 }}>
+                    {globalState.userReducer.userName}
+                </Box>
+
+            </Box>
+
+          
             {alert.displayFlag &&
                 <Alert severity="error" style={{marginTop: '15px'}}>{alert.message}</Alert>
             }

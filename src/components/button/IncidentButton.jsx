@@ -17,7 +17,7 @@ function IncidentButton(props) {
             startIcon={<AddIcon/>}
             disabled={disabled}
         >
-            New Incident
+            Incident
         </Button>
     )
 }

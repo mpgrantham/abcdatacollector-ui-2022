@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -74,62 +75,61 @@ function AddValue(props) {
     return (
 
         <Grid
-                container
-                style={{background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '15px', marginBottom: '25px'}}
-            >
-                <Grid item xs={12}>
-                    <Typography variant="subtitle1" component="div" style={{fontSize: '1.1rem'}}>
-                        Add {valueType}
-                    </Typography>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
-                    <FormControl fullWidth={true}>
-                        <RadioGroup aria-label="value-type" row name="value-type" value={valueType} onChange={handleValueTypeChange}>
-                            <FormControlLabel value='Antecedent' control={<Radio />} label='Antecedent' />
-                            <FormControlLabel value='Behavior' control={<Radio />} label='Behavior' />
-                            <FormControlLabel value='Consequence' control={<Radio />} label='Consequence' />
-                            <FormControlLabel value='Location' control={<Radio />} label='Location' />
-                        </RadioGroup>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4} style={{marginTop: '5px'}}>
-                    <TextField 
-                            error={abcErrorFl}
-                            helperText={abcErrorMsg}
-                            fullWidth={true}
-                            name="abclValue" 
-                            value={abclValue} 
-                            label={valueType}
-                            onChange={handleAbclValueChange}
-                    />
-                  
-                </Grid>
-
-                <Grid container item xs={12} md={12} style={{marginTop: '15px'}}>
-                    <Grid item xs={2} md={2}>
-                        <SaveButton 
-                            variant="contained" 
-                            color="primary"
-                            onClick={addValue} 
-                            disabled={disableAdd}
-                        >
-                            Add
-                        </SaveButton>
-                    </Grid>
-
-                    <Grid item xs={2} md={2} style={{textAlign: 'right'}}>
-                        <Button 
-                            variant="contained" 
-                            color="primary" 
-                            onClick={props.toggleAddValueSection}
-                        >
-                            Close
-                        </Button>
-                    </Grid>
-                </Grid>
+            container
+            style={{background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '15px', marginBottom: '25px'}}
+        >
+            <Grid item xs={12}>
+                <Typography variant="subtitle1" component="div" style={{fontSize: '1.1rem'}}>
+                    Add {valueType}
+                </Typography>
             </Grid>
+
+            <Grid item xs={12} md={12}>
+                <FormControl fullWidth={true}>
+                    <RadioGroup aria-label="value-type" row name="value-type" value={valueType} onChange={handleValueTypeChange}>
+                        <FormControlLabel value='Antecedent' control={<Radio />} label='Antecedent' />
+                        <FormControlLabel value='Behavior' control={<Radio />} label='Behavior' />
+                        <FormControlLabel value='Consequence' control={<Radio />} label='Consequence' />
+                        <FormControlLabel value='Location' control={<Radio />} label='Location' />
+                    </RadioGroup>
+                </FormControl>
+            </Grid>
+
+            <Grid item xs={12} md={6} style={{marginTop: '5px'}}>
+                <TextField 
+                    error={abcErrorFl}
+                    helperText={abcErrorMsg}
+                    fullWidth={true}
+                    name="abclValue" 
+                    value={abclValue} 
+                    label={valueType}
+                    onChange={handleAbclValueChange}
+                />
+            </Grid>
+
+            <Grid container item xs={12} md={12} style={{marginTop: '15px'}}>
+
+                <Box sx={{ display: 'flex', flexDirection: { xs: 'row' }, flexGrow: 1, justifyContent: 'space-between' }}>
+                    <SaveButton 
+                        variant="contained" 
+                        color="primary"
+                        onClick={addValue} 
+                        disabled={disableAdd}
+                    >
+                        Add
+                    </SaveButton>
+
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={props.toggleAddValueSection}
+                    >
+                        Close
+                    </Button>
+                </Box>
+                    
+            </Grid>
+        </Grid>
 
     );
 }

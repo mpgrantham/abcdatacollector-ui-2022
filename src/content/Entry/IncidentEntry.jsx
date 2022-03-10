@@ -4,6 +4,7 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
    
 import Alert from '@mui/material/Alert';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -29,6 +30,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { PageBreadcrumbs } from '../../components/breadcrumbs';
 import { SaveButton } from '../../components/button';
 
+import ObservedList from '../../components/observed/ObservedList';
 import SnackbarAlert from '../../components/SnackbarAlert';
 
 import IncidentService from '../../services/IncidentService';
@@ -313,14 +315,11 @@ const IncidentEntry = ({showLoading}) => {
     }
    
     return (
-        <div className="incident-entry-div" style={{padding: '25px'}}>
+        <div className="content-container incident-entry-div">
 
-            <Grid
-                container
-                direction="row"
-                style={{borderBottom: '1px solid #dddddd', paddingBottom: '15px', marginBottom: '25px'}}
-            >
-                <Grid item xs={5} md={6}>
+            <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column' }, flexGrow: 1, borderBottom: 1, borderColor: '#dddddd' }}>
+
+                <Box sx={{ flexGrow: 1, pb: 1 }}>
                     <PageBreadcrumbs>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link color="inherit" component={RouterLink} to="/" >
@@ -342,33 +341,40 @@ const IncidentEntry = ({showLoading}) => {
                             <Typography color="textPrimary">Incident Entry</Typography>
                         </Breadcrumbs>
                     </PageBreadcrumbs>
-                </Grid>
-                             
-                {currentRole !== ROLE_LOG &&
-                <Grid item xs={7} md={6} className="add-incident">
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        startIcon={<AddIcon/>}
-                        onClick={toggleAddValueSection}
-                        style={{marginRight: '25px'}}
-                    >
-                        Add ABC Value
-                    </Button>
+                </Box>
 
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        startIcon={<PictureAsPdfIcon/>}
-                        onClick={exportDataSheet}
-                    >
-                        Data Sheet
-                    </Button>
+                <Box sx={{ mb: 1, pt: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, flexGrow: 1, justifyContent: 'space-between' }}>
 
-                </Grid>
-                }
-            </Grid>
-        
+                    <Box sx={{ pb: 1 }}>
+                        <ObservedList/>
+                    </Box>
+                
+                    {currentRole !== ROLE_LOG &&
+                    <Box sx={{ flexGrow: 0, pb: 1 }}>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            startIcon={<AddIcon/>}
+                            onClick={toggleAddValueSection}
+                            style={{marginRight: '25px'}}
+                        >
+                            ABC Value
+                        </Button>
+
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            startIcon={<PictureAsPdfIcon/>}
+                            onClick={exportDataSheet}
+                        >
+                            Data Sheet
+                        </Button>
+                    </Box>
+                    }
+                </Box>
+
+            </Box>
+                   
 
             {displayAddValueFl &&
                 <AddValue 
@@ -491,7 +497,7 @@ const IncidentEntry = ({showLoading}) => {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} style={{textAlign: 'center'}}>
                     <SaveButton onClick={handleSave} disabled={observed.id === 0}/>
                 </Grid>
             </Grid>
